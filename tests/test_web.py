@@ -1,3 +1,6 @@
+import os
+import subprocess
+import sys
 from datetime import UTC, datetime, timedelta
 
 import pytest
@@ -86,3 +89,19 @@ def test_build_scheduler_single_instance_interval_job(config):
     assert job.trigger.interval == timedelta(hours=6)
     assert job.next_run_time > datetime.now(UTC)
     assert job.args == (config,)
+
+
+def test_create_app_under_uvicorn_logs_app_info_to_stderr(config):
+    # Subprocess: pytest attaches its own root handlers, which would hide a missing setup.
+    code = (
+        "import logging\n"
+        "from housetracker.config import Config\n"
+        "from housetracker.web import create_app\n"
+        f"create_app(Config(db_path={config.db_path!r}, telegram_bot_token='', telegram_chat_id='',"
+        " max_price=300000, scrape_interval_hours=6), start_scheduler=False)\n"
+        "logging.getLogger('housetracker.scraper').info('scraper-line')\n"
+    )
+    result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True,
+                            env={**os.environ, "DB_PATH": config.db_path},
+                            timeout=60)
+    assert "scraper-line" in result.stderr, result.stderr

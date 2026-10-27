@@ -2,12 +2,12 @@
 import logging
 
 from . import db
-from .config import load_config
+from .config import load_config, setup_logging
 from .scraper import run_scrape
 
 
 def main() -> None:
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+    setup_logging()
     config = load_config()
     db.init_db(config.db_path)
     results = run_scrape(config)

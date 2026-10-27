@@ -1,7 +1,15 @@
+import logging
 import os
 from dataclasses import dataclass
 
 from dotenv import load_dotenv
+
+LOG_FORMAT = "%(asctime)s %(levelname)s %(name)s: %(message)s"
+
+
+def setup_logging() -> None:
+    """Route app logs to stderr; uvicorn only configures its own loggers, not the root."""
+    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 
 
 @dataclass(frozen=True)

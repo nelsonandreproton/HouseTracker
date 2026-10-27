@@ -10,7 +10,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from . import db
-from .config import Config, load_config
+from .config import Config, load_config, setup_logging
 from .notifier import format_price
 from .scraper import run_scheduled
 
@@ -44,6 +44,7 @@ def _allowed(value: str | None, allowed: tuple[str, ...]) -> str | None:
 
 
 def create_app(config: Config | None = None, start_scheduler: bool = True) -> FastAPI:
+    setup_logging()
     config = config or load_config()
     db.init_db(config.db_path)
 
