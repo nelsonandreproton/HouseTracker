@@ -1,3 +1,10 @@
-node_modules/
+.env
 data/
+__pycache__/
+*.pyc
+.pytest_cache/
+*_tokens.json
+*_subscribers.json
+storage.json
+.venv/
 diagnose/

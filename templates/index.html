@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HouseTracker</title>
+<style>
+  :root { --bg:#f6f7f9; --fg:#1d2330; --muted:#6b7280; --card:#fff; --line:#e3e6eb; --accent:#1f5fbf; --warn:#b45309; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14171c; --fg:#e8eaee; --muted:#9aa3b2; --card:#1d2128; --line:#2c323c; --accent:#6ea8ff; --warn:#f6ad55; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--fg); font:15px/1.45 system-ui, sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; }
+  h1 { margin:0 0 4px; font-size:1.4rem; }
+  .sources { color:var(--muted); font-size:.85rem; margin-bottom:12px; }
+  .sources span { margin-right:12px; white-space:nowrap; }
+  .broken { color:var(--warn); font-weight:600; }
+  form { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+  select, button { padding:6px 8px; font:inherit; background:var(--card); color:var(--fg); border:1px solid var(--line); border-radius:6px; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:.8rem; color:var(--muted); text-transform:uppercase; }
+  .price { white-space:nowrap; font-weight:600; }
+  .small { display:block; color:var(--muted); font-size:.75rem; font-weight:400; }
+  .badge { background:var(--accent); color:#fff; border-radius:4px; padding:1px 6px; font-size:.7rem; margin-left:6px; }
+  a { color:var(--accent); }
+  @media (max-width: 720px) {
+    thead { display:none; }
+    tr { display:block; border-bottom:1px solid var(--line); padding:6px 0; }
+    td { display:block; border:0; padding:2px 10px; }
+    td::before { content: attr(data-label) ": "; color:var(--muted); font-size:.8rem; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>HouseTracker</h1>
+  <div class="sources">
+    {% for s in statuses %}
+      <span>{{ s.source }}: {{ s.last_run | local }}
+        {% if not s.ok %}<span class="broken">&#9888; com problemas</span>{% endif %}</span>
+    {% else %}
+      <span>Ainda sem dados.</span>
+    {% endfor %}
+  </div>
+
+  <form method="get">
+    <select name="district" aria-label="Distrito">
+      <option value="">Todos os distritos</option>
+      {% for d in districts %}<option value="{{ d }}" {{ "selected" if d == district }}>{{ d }}</option>{% endfor %}
+    </select>
+    <select name="kind" aria-label="Tipo de imóvel">
+      <option value="">Todos os tipos</option>
+      {% for k in kinds %}<option value="{{ k }}" {{ "selected" if k == kind }}>{{ k | capitalize }}</option>{% endfor %}
+    </select>
+    <select name="sale_type" aria-label="Tipo de venda">
+      <option value="">Todas as vendas</option>
+      {% for t in sale_types %}<option value="{{ t }}" {{ "selected" if t == sale_type }}>{{ t | capitalize }}</option>{% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <p>{{ listings | length }} imóveis</p>
+  <table>
+    <thead>
+      <tr><th>Localização</th><th>Tipologia</th><th>Preço</th><th>Tipo de venda</th><th>Termina</th><th>Fonte</th><th></th></tr>
+    </thead>
+    <tbody>
+    {% for l in listings %}
+      <tr>
+        <td data-label="Localização">{{ l.municipality }}<span class="small">{% if l.parish %}{{ l.parish }} · {% endif %}{{ l.district }}</span>
+          {% if l.first_seen and l.first_seen > new_since %}<span class="badge">novo</span>{% endif %}</td>
+        <td data-label="Tipologia">{{ l.typology }}</td>
+        <td data-label="Preço" class="price">{{ l.price | price }}<span class="small">{{ l.price_label }}</span></td>
+        <td data-label="Tipo de venda">{{ l.sale_type }}</td>
+        <td data-label="Termina">{{ l.end_date | local }}</td>
+        <td data-label="Fonte">{{ l.source }}</td>
+        <td><a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">Ver anúncio</a></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="7">Sem imóveis para os filtros escolhidos.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

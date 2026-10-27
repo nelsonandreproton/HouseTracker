@@ -1,0 +1,1564 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+	<title>Millennium Imóveis</title>
+	<meta name="copyright" content="Janela Digital SA" />
+	<meta name="author" content="portalteam@janeladigital.com" />
+	<meta http-equiv="content-language" content="pt" />
+	<meta name="robots" content="index,follow" />
+	<meta name="googlebot" content="index,follow" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+	<link href="/App_Themes/PTPT/Styles.css?Version=1.0.13" type="text/css" rel="stylesheet" />
+<!--[if lt IE 7]>
+	<link href="/App_Themes/PTPT/IE6Styles.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+	<link href="//fonts.googleapis.com/css?family=Oswald" type="text/css" rel="stylesheet" />
+	<script src="/Scripts/jquery/jquery-1.8.3.min.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	
+	<script src="/Scripts/jquery/jquery-ui-1.8.22.min.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/jquery/jquery.global.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/jquery/jquery.cycle.all.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/jquery/uncompressed.jquery.dd.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/jquery/jquery.dselect.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/jquery/jquery.ad-gallery.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/global.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	<script src="/Scripts/favorites.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+	
+    <script type="text/javascript" language="javascript">
+		$(document).ready(function()
+		{
+            $.ajax({
+                type: "GET",
+                url: "/Ajax/SearchPage/Sidebar.aspx",
+                cache: false,
+                async: true,
+                dataType: 'html',
+				success: function(data, textStatus, xmlHttpRequest)
+				{
+                    $('#sidebar').html(data);
+                }
+            });
+        });
+    </script>
+
+	<script src="/Scripts/jquery/jquery.ajaxslider.js?Version=1.0.13" language="javascript" type="text/javascript"></script>
+<!--20:28:13-->
+	<script type="text/javascript" language="javascript">
+		var isMobile =
+		{
+			Android: function()
+			{
+				return navigator.userAgent.match(/Android/i) ? true : false;
+			},
+			BlackBerry_V5: function()
+			{
+				return navigator.userAgent.match(/BlackBerry/i) && navigator.userAgent.match(/\/5.0.0./i) ? true : false;
+			},
+			iOS: function()
+			{
+				return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+			},
+			Windows: function()
+			{
+				return navigator.userAgent.match(/IEMobile/i) ? true : false;
+			},
+			any: function()
+			{
+				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+			}
+		};
+
+		function CheckMobileDivices()
+		{
+			if (isMobile.BlackBerry_V5())
+			{
+				parent.window.location.href = window.location.protocol + '//millenniummobile.janeladigital.com/';
+			}
+		}
+		CheckMobileDivices();
+
+		var sMainPage = '//ind.millenniumbcp.pt/pt/Particulares/viver/Imoveis/Pages/imoveis.aspx';
+		var sAuxPage = '//ind.millenniumbcp.pt/_layouts/BCP.SDC.FEP.Foundation.Presentation/RealEstateAuxPage.aspx';
+
+		if (top === window)
+
+			window.location.href = window.location.protocol + sMainPage + '#/Search.aspx?buf=1&sa=11&mca=1&gp=300000';
+
+		///rgpd.aspx?tk=Lvck%2b1CkvDmlAJEPaEzs%2fNiDFpmHwjBi3mDghY2Xhho%3d&m=8600
+		//http://millenniumimoveis.dev.janeladigital.com/rgpd.aspx?tk=Lvck%2b1CkvDmlAJEPaEzs%2fNiDFpmHwjBi3mDghY2Xhho%3d&m=8600
+		//http://millenniumimoveis.dev.janeladigital.com/rgpd/?tk=Lvck%2b1CkvDmlAJEPaEzs%2fNiDFpmHwjBi3mDghY2Xhho%3d&m=8600
+
+		var nOldHeight;
+		function main()
+		{
+			var rnd = (new Date()).valueOf();
+			nOldHeight = $('#mainContent').height();
+			$('body').append('<iframe id="auxIframe" style="display:none;" src="' + window.location.protocol + sAuxPage + '?rnd=' + rnd + '&height=' + nOldHeight + '&address=/Search.aspx?buf=1&sa=11&mca=1&gp=300000"></iframe>');
+			setInterval(CrossResize, 500);
+		}
+
+		function CrossResize()
+		{
+			nHeight = $('#mainContent').height();
+			if(nHeight !== nOldHeight)
+			{
+				var oFrame = document.getElementById('auxIframe');
+				oFrame.parentNode.removeChild(oFrame);
+
+				var rnd = (new Date()).valueOf();
+				$('body').append('<iframe id="auxIframe" style="display:none;" src="' + window.location.protocol + sAuxPage + '?rnd=' + rnd + '&height=' + nHeight + '"></iframe>');
+				nOldHeight = nHeight;
+			}
+		}
+
+		function ExternalRedirect(address)
+		{
+			$('#auxIframe').attr('src', window.location.protocol + sAuxPage + '?redirect=' + address);
+		}
+
+		$(document).ready(function()
+		{
+			$('select').dselect();
+		});
+	</script>
+</head>
+<body onload="setTimeout(main, 10);">
+	<div id="mainContent" class="mainContent">
+		
+
+<script type="text/javascript" language="javascript" src="/Scripts/jquery/jquery.megamenu.js"></script>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function ()
+    {
+        $('#topMenuMainList').find('> li').each(function ()
+        {
+            var $mainContent = $('#mainContent');
+            var $menuHolder = $(this).find('> div');
+            if ($menuHolder.size() == 0)
+            {
+                $(this).find('> a:not(.hover)').parent().hover(
+                    //On mouse in
+                    function ()
+                    {
+                        $(this).find('> a').addClass('hover');
+                    },
+                    //On mouse out
+                    function ()
+                    {
+                        if (!$(this).find('> a').hasClass('selected'))
+                            $(this).find('> a').removeClass('hover');
+                    }
+                );
+                return;
+            }
+            var $menu = $menuHolder.find('> ul');
+            var menuWidth = 0;
+            var mainContentRightEdge = $mainContent.offset().left + $mainContent.width();
+
+            $menu.find('> li').each(function ()
+            {
+                menuWidth += $(this).outerWidth(true);
+            });
+            $menuHolder.width(menuWidth + 38);
+
+            if (($menuHolder.offset().left + $menuHolder.outerWidth(true)) > mainContentRightEdge)
+            {
+                $menuHolder.css('margin-left', (mainContentRightEdge - ($menuHolder.offset().left + $menuHolder.outerWidth(true))) + 'px');
+            }
+            else if ($.browser.msie && $.browser.version.indexOf('7') == 0)
+            {
+                $menuHolder.css('margin-left', (0 - $(this).width()) + 'px');
+            }
+
+            $menuHolder.hide().visible();
+            $(this).hover(
+                //On mouse in
+                function ()
+                {
+                    $(this).find('> a').addClass('hover');
+                    $menuHolder.css('z-index', '100').fadeIn();
+                },
+                //On mouse out
+                function ()
+                {
+                    if (!$(this).find('> a').hasClass('selected'))
+                        $(this).find('> a').removeClass('hover');
+
+                    $menuHolder.stop(true, true).css('z-index', '99').fadeOut();
+                }
+            );
+        });
+    });
+</script>
+
+<div class="topMenu">
+    <ul id="topMenuMainList" class="topMenuMainList">
+        <li>
+            <a href="/Default.aspx" id="NavigationTab1_TabHome" title="Home"><span>
+                <div class="menuLink"></div>
+            </span></a>
+        </li>
+        <li>
+            <a href="/Search.aspx" id="NavigationTab1_TabSearch" title="Imóveis" class="hover selected"><span>Imóveis</span></a>
+        </li>
+        
+
+        <li><a title="Residencial" href="/Search.aspx?tab=329"><span>Residencial</span></a></li><li><a title="Terrenos" href="/Search.aspx?tab=204"><span>Terrenos</span></a><div><ul><li><a href="/Search.aspx?tab=313&amp;toptab=204">&#160;&#160;Para Moradia</a></li><li><a href="/Search.aspx?tab=314&amp;toptab=204">&#160;&#160;Constru&#231;&#227;o em Altura</a></li><li><a href="/Search.aspx?tab=317&amp;toptab=204">&#160;&#160;Para Moradias em Banda</a></li><li><a href="/Search.aspx?tab=318&amp;toptab=204">&#160;&#160;Terrenos Agricolas</a></li><li><a href="/Search.aspx?tab=319&amp;toptab=204">&#160;&#160;Empreendimentos/Outros</a></li></ul></div></li><li><a title="Inacabados" href="/Search.aspx?tab=315"><span>Inacabados</span></a></li><li><a title="Lojas" href="/Search.aspx?tab=201"><span>Lojas</span></a></li><li><a title="Escritórios" href="/Search.aspx?tab=202"><span>Escrit&#243;rios</span></a></li><li><a title="Armazéns" href="/Search.aspx?tab=203"><span>Armaz&#233;ns</span></a></li><li><a title="Campanhas"><span>Campanhas</span></a></li>
+    </ul>
+
+    
+            <style>
+                .langTemplate
+                {
+                    float: right;
+                    color: white;
+                    padding: inherit;
+                    font-size: small;
+                }
+
+                    .langTemplate > a:hover
+                    {
+                        text-shadow: #fff 0 1px 0;
+                        cursor: pointer;
+                    }
+            </style>
+        
+            <span class="langTemplate">
+                <a title="FR" onclick="toogleCookie('FR')">
+                    FR
+                </a>
+            </span>
+        
+            <span class="langTemplate">
+                <a title="EN" onclick="toogleCookie('EN')">
+                    EN
+                </a>
+            </span>
+        
+            <span class="langTemplate">
+                <a title="PT" onclick="toogleCookie('PT')">
+                    PT
+                </a>
+            </span>
+        
+
+    <script>
+        function toogleCookie(languageName)
+        {
+            var cookie = getCookie('LangCookie');
+
+            setCookie('LangCookie', languageName);
+
+            window.location.reload();
+        }
+
+        function getCookie(cname)
+        {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++)
+            {
+                var c = ca[i];
+                while (c.charAt(0) == ' ')
+                {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0)
+                {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function setCookie(cname, cvalue)
+        {
+            document.cookie = cname + "=" + cvalue + ";path=/;SameSite=None;secure;";
+        }
+    </script>
+</div>
+<!--[if lt IE 7]>
+		
+<div id="oldBrowserWarning" class="mainBar">
+	<div>Aconselhamos a actualizar a versão do seu browser para uma melhor experiência de utilização!</div>
+	<div class="links">
+		<a href="http://www.microsoft.com/portugal/windows/internet-explorer/default.aspx" target="_self">Internet Explorer</a>
+		<a href="http://www.google.com/chrome?hl=pt-PT" target="_self">Google Chrome</a>
+		<a href="http://www.mozilla-europe.org/pt/" target="_self">Firefox</a>
+		<a href="http://www.opera.com/browser/" target="_self">Opera</a>
+	</div>
+	<div class="closeButton" onclick="javascript:$('#oldBrowserWarning').slideUp('slow');"></div>
+</div>
+<script type="text/javascript" defer="defer">
+	$(document).ready(function()
+	{
+		$('#oldBrowserWarning').delay(1000).slideDown('slow');
+	});
+</script>
+<![endif]-->
+		
+    <div class="rightContent">
+        
+<div class="personalArea">
+	<p class="personalAreaTitle">
+		A minha área</p>
+	<a class="personalAreaFav" onclick="OpenFavorites();" style="cursor:pointer;">
+		<span id="favCount"></span><span>favoritos</span>
+	</a>
+	<a class="personalAreaSearch" onclick="OpenSearches();" style="cursor:pointer;">
+		<span id="searchCount"></span><span>pesquisas</span>
+	</a>
+</div>
+<div id="favoritesPopupContent" title="Os meus imóveis favoritos" changed="true"></div>
+<div id="searchesPopupContent" title="As minhas pesquisas" changed="true"></div>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		window.favoritesPopup = $('#favoritesPopupContent').dialog({ autoOpen: false, width: 750, position: [115, 160] });
+		window.searchesPopup = $('#searchesPopupContent').dialog({ autoOpen: false, width: 750, position: [115, 160] });
+	});
+	
+	function OpenFavorites()
+	{
+		if ($('#favoritesPopupContent').attr('changed') == 'true')
+		{
+			$.ajax({
+				type: 'GET',
+				url: '/Ajax/PersonalArea/Favorites.aspx',
+				success: function(resp)
+				{
+					$('#favoritesPopupContent').html(resp);
+					$('#favoritesPopupContent').attr('changed', 'false');
+					window.favoritesPopup.dialog('open');
+				}
+			});
+		}
+		else
+		{
+			window.favoritesPopup.dialog('open');
+		}
+	}
+
+	function OpenSearches()
+	{
+		if ($('#searchesPopupContent').attr('changed') == 'true')
+		{
+			$.ajax({
+				type: 'GET',
+				url: '/Ajax/PersonalArea/Searches.aspx',
+				success: function(resp)
+				{
+					$('#searchesPopupContent').html(resp);
+					$('#searchesPopupContent').attr('changed', 'false');
+					window.searchesPopup.dialog('open');
+				}
+			});
+		}
+		else
+		{
+			window.searchesPopup.dialog('open');
+		}
+	}
+</script>
+        
+<div class="searchFilter">
+    
+    
+        <div class="searchFilterDetail" >
+            <div class="filterDetailLine">
+                <div class="filterDetailLineTitle">Quero...</div>
+
+                <label>
+                    <select id="DdlBusiness" onclick="ChkBusiness_OnClick();">
+                        
+                                <option value='' >
+                                    Tipo Negócio</option>
+                            
+                                <option value='1' selected='selected'>
+                                    Comprar</option>
+                            
+                                <option value='1020' >
+                                    Outros Negócios</option>
+                            
+                    </select>
+                </label>
+
+                
+            </div>
+            <div class="filterDetailLine">
+                <div class="filterDetailLineTitle">O quê?</div>
+                <label>
+                    <select id="DdlMasterCategory">
+                        
+                                <option value='' >
+                                    Escolher Imóvel</option>
+                            
+                                <option value='1' selected='selected'>
+                                    Apartamentos</option>
+                            
+                                <option value='2' >
+                                    Moradias</option>
+                            
+                                <option value='3' >
+                                    Terrenos</option>
+                            
+                                <option value='4' >
+                                    Lojas</option>
+                            
+                                <option value='8' >
+                                    Armazéns</option>
+                            
+                                <option value='9' >
+                                    Garagens</option>
+                            
+                    </select>
+                </label>
+                <label>
+                    <select id="DdlStatus">
+                        
+                                <option value='' >
+                                    Escolher Estado</option>
+                            
+                                <option value='0' >
+                                    Usado</option>
+                            
+                                <option value='10' >
+                                    Não Aplicável</option>
+                            
+                    </select>
+                </label>
+                <label>
+                    <select id="DdlEnergyCategory">
+                        
+                                <option value='' >
+                                    Classe Energética</option>
+                            
+                                <option value='1' >
+                                    A+</option>
+                            
+                                <option value='2' >
+                                    A</option>
+                            
+                                <option value='3' >
+                                    B</option>
+                            
+                                <option value='4' >
+                                    B-</option>
+                            
+                                <option value='5' >
+                                    C</option>
+                            
+                                <option value='6' >
+                                    D</option>
+                            
+                                <option value='7' >
+                                    E</option>
+                            
+                                <option value='8' >
+                                    F</option>
+                            
+                                <option value='9' >
+                                    G</option>
+                            
+                                <option value='10' >
+                                    Isento</option>
+                            
+                    </select>
+                </label>
+                <div class="sliderLine">
+                    <div class="sliderShort">
+                        <p>
+                            Área
+                        </p>
+                        <div id="Slider_Area">
+                        </div>
+                        <div class="sliderMin">
+                            <input id="TxtAreaFromReadOnly" type="text" readonly="readonly" />
+                        </div>
+                        <div class="sliderMax">
+                            <input id="TxtAreaToReadOnly" type="text" readonly="readonly" />
+                        </div>
+                        <input id="TxtAreaFrom" type="hidden" />
+                        <input id="TxtAreaTo" type="hidden" />
+                    </div>
+                    <div class="sliderShort">
+                        <p>
+                            Tipologia
+                        </p>
+                        <div id="Slider_MasterProptype">
+                        </div>
+                        <div class="sliderMin">
+                            <input id="TxtMasterProptypeFromReadOnly" type="text" readonly="readonly" />
+                        </div>
+                        <div class="sliderMax">
+                            <input id="TxtMasterProptypeToReadOnly" type="text" readonly="readonly" />
+                        </div>
+                        <input id="TxtMasterProptypeFrom" type="hidden" />
+                        <input id="TxtMasterProptypeTo" type="hidden" />
+                    </div>
+                </div>
+            </div>
+            <div class="filterDetailLine">
+                <div class="filterDetailLineTitle">
+                    Onde?
+                </div>
+                <label>
+                    <select id="DdlState" onchange="DdlState_OnChange();" disabled="disabled">
+                        <option value="">Distrito</option>
+                    </select>
+                </label>
+                <label>
+                    <select id="DdlTown" onchange="DdlTown_OnChange();" disabled="disabled">
+                        <option value="">Concelho</option>
+                    </select>
+                </label>
+                <label>
+                    <select id="DdlNeighborhood" disabled="disabled">
+                        <option value="">Freguesia</option>
+                    </select>
+                </label>
+            </div>
+            <div class="filterDetailLine">
+                <div class="filterDetailLineTitle">
+                    Preço
+                </div>
+                <div class="sliderLarge">
+                    <div id="Slider_Price">
+                    </div>
+                    <div class="sliderMin">
+                        <input id="TxtMinPriceReadOnly" type="text" readonly="readonly" />
+                    </div>
+                    <div class="sliderMax">
+                        <input id="TxtMaxPriceReadOnly" type="text" readonly="readonly" />
+                    </div>
+                    <input id="TxtMinPrice" type="hidden" />
+                    <input id="TxtMaxPrice" type="hidden" />
+                </div>
+                <a href="javascript:void(0)" onclick="BtnDetailedSearch_OnClick();return false;"
+                    class="searchFilterDetailSubmit">Pesquisar</a>
+            </div>
+            
+                <div class="filterDetailReference">
+                    <form id="Form1" action="" onsubmit="BtnReferenceSearch_OnClick(); return false;">
+                        <div class="filterDetailLineTitle">
+                            Referência
+                        </div>
+                        <input id="TxtReference" maxlength="32" type="text" />
+                        <a href="javascript:void(0)" onclick="BtnReferenceSearch_OnClick();return false;"
+                            class="searchFilterReferenceSubmit">Pesquisar</a>
+                    </form>
+                </div>
+            
+        </div>
+    
+</div>
+
+<script language="javascript" type="text/javascript">
+    var JsonDataURL = '/Ajax/HttpRequest.aspx';
+    var CountryID = 620;
+
+    var SliderMinPrice = 0;
+    var SliderMaxPrice = 500000;
+    var SliderPriceStep = 5000;
+    var MinPriceQS = 0;
+    var MaxPriceQS = 300000;
+
+    var StateQS = "11";
+    var TownQS = "";
+    var NeighborhoodQS = "";
+
+    var ChkBankProperties = $("#ChkBankProperties");
+    var ChkOtherProperties = $("#ChkOtherProperties");
+
+    var DdlBusiness = $("#DdlBusiness");
+    var DdlState = $("#DdlState");
+    var DdlTown = $("#DdlTown");
+    var DdlNeighborhood = $("#DdlNeighborhood");
+    var DdlMasterCategory = $("#DdlMasterCategory");
+    var DdlStatus = $("#DdlStatus");
+    var DdlEnergyCategory = $("#DdlEnergyCategory");
+
+    var StatesDefault = [{ "ID": "", "ShortName": "Distrito" }];
+    var TownsDefault = [{ "ID": "", "Name": "Concelho" }];
+    var NeighborhoodsDefault = [{ "ID": "", "Name": "Freguesia" }];
+
+    var StatesLoading = [{ "ID": "", "ShortName": "A Carregar..." }];
+    var TownsLoading = [{ "ID": "", "Name": "A Carregar..." }];
+    var NeighborhoodsLoading = [{ "ID": "", "Name": "A Carregar..." }];
+
+    var MasterProptypeArray = [{"ID":1,"UID":null,"NameMLS":{"Value":"[PT-PT]T0[/PT-PT][EN-GB]Studio[/EN-GB][FR-FR]Studio[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T0"},{"ID":2,"UID":null,"NameMLS":{"Value":"[PT-PT]T1[/PT-PT][EN-GB]1 Bedroom[/EN-GB][FR-FR]2 Pièces[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T1"},{"ID":3,"UID":null,"NameMLS":{"Value":"[PT-PT]T2[/PT-PT][EN-GB]2 Bedrooms[/EN-GB][FR-FR]3 Pièces[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T2"},{"ID":4,"UID":null,"NameMLS":{"Value":"[PT-PT]T3[/PT-PT][EN-GB]3 Bedrooms[/EN-GB][FR-FR]4 Pièces[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T3"},{"ID":5,"UID":null,"NameMLS":{"Value":"[PT-PT]T4[/PT-PT][EN-GB]4 Bedrooms[/EN-GB][FR-FR]5 Pièces[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T4"},{"ID":6,"UID":null,"NameMLS":{"Value":"[PT-PT]T5[/PT-PT][EN-GB]5 Bedrooms[/EN-GB][FR-FR]6 Pièces[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T5"},{"ID":7,"UID":null,"NameMLS":{"Value":"[PT-PT]T6 ou superior[/PT-PT][EN-GB]6 or more Bedrooms[/EN-GB][FR-FR]7 Pièces Supérieur[/FR-FR]","InvalidValue":null,"UseAlternativeIfMissing":true,"UseAlternativeIfEmpty":false,"NativeAlternative":null},"Name":"T6 ou superior"}];
+
+    var TxtReference = $("#TxtReference");
+    var TabQS = "";
+    var OnlyBankPropertiesQS = "true";
+
+    //Initialize Page
+    $(document).ready(function ()
+    {
+        $(".searchTypeChange").click(function ()
+        {
+            $(".searchFilter").children().slideToggle("slow");
+        });
+
+        LoadStates(true);
+        InitPriceSlider();
+
+        TxtReference.val('');
+
+        switch (OnlyBankPropertiesQS)
+        {
+            case "true":
+                ChkBankProperties.attr('checked', true);
+                break;
+            case "false":
+                ChkOtherProperties.attr('checked', true);
+                break;
+            default:
+                ChkBankProperties.attr('checked', true);
+                ChkOtherProperties.attr('checked', true);
+                break;
+        }
+    });
+
+    function BtnTextSearch_OnClick()
+    {
+        var TxtTextSearch = $("#TxtTextSearch");
+        var txtTextSearchValue = TxtTextSearch.val().trim();
+
+        if (txtTextSearchValue == "")
+        {
+            ShowFormNotify('Tem de preencher a caixa de texto', TxtTextSearch, 'top');
+        }
+        else if (!txtTextSearchValue.secure())
+        {
+            ShowFormNotify('Contêm caracteres inválidos', TxtTextSearch, 'top');
+        }
+        else
+        {
+            //* Construção do URL
+            var url = "/Search.aspx?";
+
+            url += "ss=" + txtTextSearchValue;
+            if (TabQS != "")
+            {
+                url += "&";
+                url += "tab=" + TabQS;
+            }
+            url = url.replace('#', '');
+            window.location.href = encodeURI(url);
+        }
+    }
+
+    function ChkBusiness_OnClick()
+    {
+        //Usado para manter se possível os preços seleccionados pelo utilizador
+        var sliderMinPriceSelected = $("#Slider_Price").slider("values", 0);
+        var sliderMaxPriceSelected = $("#Slider_Price").slider("values", 1);
+
+        if (DdlBusiness.val() == 2)
+        {
+            SliderMinPrice = 0;
+            SliderMaxPrice = 2500;
+            SliderPriceStep = 50;
+        }
+        else
+        {
+            SliderMinPrice = 0;
+            SliderMaxPrice = 500000;
+            SliderPriceStep = 5000;
+        }
+
+        MinPriceQS = sliderMinPriceSelected > SliderMinPrice && sliderMinPriceSelected < SliderMaxPrice && sliderMinPriceSelected > SliderPriceStep
+            ? sliderMinPriceSelected
+            : SliderMinPrice;
+
+        MaxPriceQS = sliderMaxPriceSelected > SliderMinPrice && sliderMaxPriceSelected < SliderMaxPrice && sliderMaxPriceSelected > SliderPriceStep
+            ? sliderMaxPriceSelected
+            : SliderMaxPrice;
+
+        InitPriceSlider();
+    }
+
+    function BtnReferenceSearch_OnClick()
+    {
+        var txtReferenceValue = TxtReference.val().trim();
+
+        if (txtReferenceValue == "")
+        {
+            ShowFormNotify('Tem de preencher a caixa de texto', TxtReference, 'top');
+        }
+        else if (!txtReferenceValue.secure())
+        {
+            ShowFormNotify('Contêm caracteres inválidos', TxtReference, 'top');
+        }
+        else
+        {
+            //* Construção do URL
+            var url = "/Search.aspx?";
+
+            url += "ref=" + txtReferenceValue;
+            if (TabQS != "")
+            {
+                url += "&";
+                url += "tab=" + TabQS;
+            }
+
+            window.location.href = encodeURI(url);
+        }
+    }
+
+    function DdlState_OnChange()
+    {
+        if (!DdlTown)
+        {
+            return;
+        }
+
+        LoadTowns(DdlState.val(), false);
+    }
+
+    function DdlTown_OnChange()
+    {
+        if (!DdlNeighborhood)
+        {
+            return;
+        }
+
+        LoadNeighborhoods(DdlTown.val(), false);
+    }
+
+    function LoadStates(selectQueryStringValue)
+    {
+        reset = function ()
+        {
+            DdlTown.populateWithJSON(TownsDefault, 'ID', 'Name', true).disable().dselect('refresh');
+            DdlNeighborhood.populateWithJSON(NeighborhoodsDefault, 'ID', 'Name', true).disable().dselect('refresh');
+        };
+
+        $.ajax(
+            {
+                type: "GET",
+                url: JsonDataURL,
+                data: "tipo=sa_cid&ct=" + CountryID,
+                cache: true,
+                dataType: "json", //HTML ou JSON
+                beforeSend: function ()
+                {
+                    DdlState.populateWithJSON(StatesLoading, 'ID', 'ShortName', true).disable();
+                    DdlTown.populateWithJSON(TownsLoading, 'ID', 'Name', true).disable();
+                    DdlNeighborhood.populateWithJSON(NeighborhoodsLoading, 'ID', 'Name', true).disable();
+                },
+                success: function (response)
+                {
+                    DdlState.populateWithJSON($.merge($.merge([], StatesDefault), response), 'ID', 'ShortName', true).enable();
+                },
+                error: function ()
+                {
+                    DdlState.populateWithJSON(StatesDefault, 'ID', 'ShortName', true).disable();
+                },
+                complete: function ()
+                {
+                    if (selectQueryStringValue && StateQS != "")
+                    {
+                        DdlState.val(StateQS);
+                        LoadTowns(StateQS, true);
+                    }
+                    DdlState.dselect('refresh');
+                    reset();
+                }
+            });
+    }
+
+    function LoadTowns(stateID, selectQueryStringValue)
+    {
+        reset = function ()
+        {
+            DdlNeighborhood.populateWithJSON(NeighborhoodsDefault, 'ID', 'Name', true).disable().dselect('refresh');
+        };
+
+        if (!stateID || stateID == 0 || stateID == "")
+        {
+            DdlTown.populateWithJSON(TownsDefault, 'ID', 'Name', true).disable().dselect('refresh');
+            reset();
+            return;
+        }
+
+        $.ajax(
+            {
+                type: "GET",
+                url: JsonDataURL,
+                data: "tipo=tw_said&sa_id=" + stateID,
+                cache: true,
+                dataType: "json",
+                beforeSend: function ()
+                {
+                    DdlTown.populateWithJSON(TownsLoading, 'ID', 'Name', true).disable();
+                    DdlNeighborhood.populateWithJSON(NeighborhoodsLoading, 'ID', 'Name', true).disable();
+                },
+                success: function (response)
+                {
+                    DdlTown.populateWithJSON($.merge($.merge([], TownsDefault), response), 'ID', 'Name', true).enable();
+                },
+                error: function ()
+                {
+                    DdlTown.populateWithJSON(TownsDefault, 'ID', 'Name', true).disable();
+                },
+                complete: function ()
+                {
+                    if (selectQueryStringValue && TownQS != "")
+                    {
+                        DdlTown.val(TownQS);
+                        LoadNeighborhoods(TownQS, true);
+                    }
+                    DdlTown.dselect('refresh');
+                    reset();
+                }
+            });
+    }
+
+    function LoadNeighborhoods(townID, selectQueryStringValue)
+    {
+        if (!townID || townID == 0 || townID == "")
+        {
+            DdlNeighborhood.populateWithJSON(NeighborhoodsDefault, 'ID', 'Name', true).disable().dselect('refresh');
+            return;
+        }
+
+        $.ajax(
+            {
+                type: "GET",
+                url: JsonDataURL,
+                data: "tipo=nh_twid&tw_id=" + townID,
+                cache: true,
+                dataType: "json",
+                beforeSend: function ()
+                {
+                    DdlNeighborhood.populateWithJSON(NeighborhoodsLoading, 'ID', 'Name', true).disable();
+                },
+                success: function (response)
+                {
+                    DdlNeighborhood.populateWithJSON($.merge($.merge([], NeighborhoodsDefault), response), 'ID', 'Name', true).enable();
+                },
+                error: function ()
+                {
+                    DdlNeighborhood.populateWithJSON(NeighborhoodsDefault, 'ID', 'Name', true).disable();
+                },
+                complete: function ()
+                {
+                    if (selectQueryStringValue && NeighborhoodQS != "")
+                    {
+                        DdlNeighborhood.val(NeighborhoodQS);
+                    }
+                    DdlNeighborhood.dselect('refresh');
+                }
+            });
+    }
+
+    //Sliders
+    $(function ()
+    {
+        $("#Slider_Area").slider(
+            {
+                range: true,
+                min: 0,
+                max: 500,
+                step: 10,
+                values: [0, 500],
+                slide: function (event, ui)
+                {
+                    SliderArea_OnChange(ui.values[0], ui.values[1]);
+                }
+            });
+
+        SliderArea_OnChange($("#Slider_Area").slider("values", 0), $("#Slider_Area").slider("values", 1));
+    });
+
+    function SliderArea_OnChange(minValue, maxValue)
+    {
+        var sliderMinValue = $("#Slider_Area").slider("option", "min");
+        var sliderMaxValue = $("#Slider_Area").slider("option", "max");
+        var maxValueLabel = String(maxValue).toNumberMask(0, ",", ".");
+        var minValueLabel = String(minValue).toNumberMask(0, ",", ".");
+
+        if (minValue <= sliderMinValue || minValue > sliderMaxValue)
+        {
+            minValueLabel = String(sliderMinValue).toNumberMask(0, ",", ".");
+            minValue = "";
+        }
+
+        if (maxValue < sliderMinValue || maxValue >= sliderMaxValue)
+        {
+            maxValueLabel = ">" + String(sliderMaxValue).toNumberMask(0, ",", ".");
+            maxValue = "";
+        }
+
+        $("#TxtAreaFromReadOnly").val("de: " + minValueLabel + "m²");
+        $("#TxtAreaFrom").val(minValue);
+
+        $("#TxtAreaToReadOnly").val("até: " + maxValueLabel + "m²");
+        $("#TxtAreaTo").val(maxValue);
+    }
+
+    $(function ()
+    {
+        $("#Slider_MasterProptype").slider({
+            range: true,
+            min: 0,
+            max: MasterProptypeArray.length - 1,
+            step: 1,
+            values: [GetMasterProptypePositionByValueID(1, 0), GetMasterProptypePositionByValueID(7, MasterProptypeArray.length - 1)],
+        slide: function(event, ui)
+        {
+            SliderMasterProptype_OnChange(ui.values[0], ui.values[1]);
+        }
+    });
+
+    SliderMasterProptype_OnChange($("#Slider_MasterProptype").slider("values", 0), $("#Slider_MasterProptype").slider("values", 1));
+	});
+
+    function SliderMasterProptype_OnChange(minValue, maxValue)
+    {
+        var sliderMinValue = $("#Slider_MasterProptype").slider("option", "min");
+        var sliderMaxValue = $("#Slider_MasterProptype").slider("option", "max");
+
+        if (minValue == "" || minValue < sliderMinValue || minValue > sliderMaxValue)
+            minValue = sliderMinValue;
+
+        if (maxValue == "" || maxValue < sliderMinValue || maxValue > sliderMaxValue)
+            maxValue = sliderMaxValue;
+
+        $("#TxtMasterProptypeFromReadOnly").val("de: " + MasterProptypeArray[minValue].Name);
+        $("#TxtMasterProptypeFrom").val(MasterProptypeArray[minValue].ID);
+
+        $("#TxtMasterProptypeToReadOnly").val("até: " + MasterProptypeArray[maxValue].Name);
+        $("#TxtMasterProptypeTo").val(MasterProptypeArray[maxValue].ID);
+    }
+
+    function GetMasterProptypePositionByValueID(id, defaultValue)
+    {
+        for (i = 0; i < MasterProptypeArray.length; i++)
+        {
+            if (MasterProptypeArray[i].ID == id)
+                return i;
+        }
+
+        return defaultValue;
+    }
+
+    function InitPriceSlider()
+    {
+        if ($("#Slider_Price"))
+            $("#Slider_Price").slider().slider('destroy');
+
+        $("#Slider_Price").slider({
+            range: true,
+            min: SliderMinPrice,
+            max: SliderMaxPrice,
+            step: SliderPriceStep,
+            values: [MinPriceQS, MaxPriceQS],
+            slide: function (event, ui)
+            {
+                SliderPrice_OnChange(ui.values[0], ui.values[1]);
+            }
+        });
+
+        SliderPrice_OnChange($("#Slider_Price").slider("values", 0), $("#Slider_Price").slider("values", 1));
+    }
+
+    function SliderPrice_OnChange(minValue, maxValue)
+    {
+        var sliderMinValue = $("#Slider_Price").slider("option", "min");
+        var sliderMaxValue = $("#Slider_Price").slider("option", "max");
+        var maxValueLabel = String(maxValue).toNumberMask(0, ",", ".");
+        var minValueLabel = String(minValue).toNumberMask(0, ",", ".");
+
+        if (minValue <= sliderMinValue || minValue > sliderMaxValue)
+        {
+            minValueLabel = String(sliderMinValue).toNumberMask(0, ",", ".");
+            minValue = "";
+        }
+
+        if (maxValue < sliderMinValue || maxValue >= sliderMaxValue)
+        {
+            maxValueLabel = ">" + String(sliderMaxValue).toNumberMask(0, ",", ".");
+            maxValue = "";
+        }
+
+        $("#TxtMinPriceReadOnly").val("de: " + "€ " + minValueLabel);
+        $("#TxtMinPrice").val(minValue);
+
+        $("#TxtMaxPriceReadOnly").val("até: " + "€ " + maxValueLabel);
+        $("#TxtMaxPrice").val(maxValue);
+    }
+
+    function BtnDetailedSearch_OnClick()
+    {
+        var state = "";
+        var town = "";
+        var neighborhood = "";
+        var masterCategory = "";
+        var status = "";
+        var businessFlag = 0;
+        var minPrice = $("#TxtMinPrice").val();
+        var maxPrice = $("#TxtMaxPrice").val();
+        var masterProptypeFrom = $("#TxtMasterProptypeFrom").val();
+        var masterProptypeTo = $("#TxtMasterProptypeTo").val();
+        var minArea = $("#TxtAreaFrom").val();
+        var maxArea = $("#TxtAreaTo").val();
+        var reference = TxtReference.val();
+        var onlyBankProperties = "";
+        var energyCategory = "";
+
+        if (ChkBankProperties.is(':checked') && !ChkOtherProperties.is(':checked'))
+            onlyBankProperties = "1";
+        else if (ChkOtherProperties.is(':checked') && !ChkBankProperties.is(':checked'))
+            onlyBankProperties = "0";
+
+        businessFlag = DdlBusiness.val();
+
+        if (DdlState && $("option:selected", DdlState).index() >= 1)
+            state = DdlState.val();
+
+        if (DdlTown && $("option:selected", DdlTown).index() >= 1)
+            town = DdlTown.val();
+
+        if (DdlNeighborhood && $("option:selected", DdlNeighborhood).index() >= 1)
+            neighborhood = DdlNeighborhood.val();
+
+        if (DdlMasterCategory && $("option:selected", DdlMasterCategory).index() >= 1)
+            masterCategory = DdlMasterCategory.val();
+
+        if (DdlStatus && $("option:selected", DdlStatus).index() >= 1)
+            status = DdlStatus.val();
+
+        if (DdlEnergyCategory && $("option:selected", DdlEnergyCategory).index() >= 1)
+            energyCategory = DdlEnergyCategory.val();
+
+        //* Construção do URL
+        var url = "/Search.aspx?";
+
+        if (businessFlag > 0)
+        {
+            url += "&";
+            url += "buf=" + businessFlag;
+        }
+
+        if (state >= 1)
+        {
+            url += "&";
+            url += "sa=" + state;
+        }
+
+        if (town >= 1)
+        {
+            url += "&";
+            url += "tw=" + town;
+        }
+
+        if (neighborhood >= 1)
+        {
+            url += "&";
+            url += "nh=" + neighborhood;
+        }
+
+        if (masterCategory >= 1)
+        {
+            url += "&";
+            url += "mca=" + masterCategory;
+        }
+
+        if (status != "" && status >= 0)
+        {
+            url += "&";
+            url += "st=" + status;
+        }
+
+        if (minPrice != "")
+        {
+            url += "&";
+            url += "lp=" + minPrice;
+        }
+
+        if (maxPrice != "")
+        {
+            url += "&";
+            url += "gp=" + maxPrice;
+        }
+
+        if (masterProptypeFrom > MasterProptypeArray[0].ID)
+        {
+            url += "&";
+            url += "mprF=" + masterProptypeFrom;
+        }
+
+        if (masterProptypeTo != MasterProptypeArray[MasterProptypeArray.length - 1].ID)
+        {
+            url += "&";
+            url += "mprT=" + masterProptypeTo;
+        }
+
+        if (minArea != "")
+        {
+            url += "&";
+            url += "lau=" + minArea;
+        }
+
+        if (maxArea != "")
+        {
+            url += "&";
+            url += "gau=" + maxArea;
+        }
+
+        if (TabQS != "")
+        {
+            url += "&";
+            url += "tab=" + TabQS;
+        }
+
+        if (onlyBankProperties != "")
+        {
+            url += "&";
+            url += "obp=" + onlyBankProperties;
+        }
+
+        if (energyCategory != "" && energyCategory >= 1)
+        {
+            url += "&";
+            url += "ec=" + energyCategory;
+        }
+
+        url = url.replace("?&", "?");
+
+        window.location.href = url;
+    }
+</script>
+
+
+        <div id="sidebar" class="clientContent"></div>
+        
+    </div>
+    <div class="leftContent">
+        <div class="searchResultHeader">
+            <div class="searchResultBreadcrumb">
+                <a id="MC_aLocation" href="/">Home</a>
+                 / Imóveis / Imóveis do Banco,  Apartamentos, para Venda, Distrito de Lisboa, até 300 000€
+            </div>
+            
+                <div class="searchResultActions">
+                    <a href="javascript:void(0);"
+                        class="saveSearch" search="%2fSearch.aspx%3fsa%3d11%26mca%3d1%26buf%3d1%26gp%3d300000%26obp%3d1_removeSearch_<span></span>Remover Pesquisa">
+                        <span></span>Guardar Pesquisa</a>
+                    
+                        <label>
+                            <select id="ddlSort" onchange="SortResults();">
+                                <option value="" selected="selected">Ordenar por</option>
+
+                                
+                                <option value="1">Mais baratos</option>
+                                <option value="2">Mais caros</option>
+                                
+                                <option value="3">Mais recentes</option>
+                                <option value="4">Mais antigos</option>
+                                <option value="5">Menor área</option>
+                                <option value="6">Maior área</option>
+                                
+                                <option value="8">Tipologia</option>
+                                <option value="9">Concelho</option>
+                            </select>
+                        </label>
+
+                        <script type="text/javascript" language="javascript">
+                            var ddlSort = $("#ddlSort");
+
+                            var sort = GetQuerystring('sort', '');
+                            ddlSort.val(sort)
+
+						function SortResults()
+						{
+							//var sUrl = window.location.toString().replace(/sort=[^&]*(&|$)/ig, '');
+							//sUrl += (sUrl.indexOf('?') == -1 ? '?' : (sUrl.charAt(sUrl.length - 1) == '&') ? '' : '&') + 'sort=' + ddlSort.val();
+
+                            var newURL = '/search.aspx?';
+                            var newParams = new Array();
+
+                            var search = decodeURI(location.search);
+                            search = search.substr(1);
+
+                            var params = search.split("&");
+                            var foundSortParam = false;
+
+							for (var i = 0; i < params.length; i++)
+							{
+                                var pairs = params[i].split("=");
+
+								if (pairs.length == 2)
+								{
+									if (pairs[0] == 'sort')
+									{
+                                        newParams.push(pairs[0] + '=' + ddlSort.val());
+                                        foundSortParam = true;
+                                    }
+									else if (pairs[0] == 'pn')
+									{
+                                        newParams.push(pairs[0] + '=1');
+                                    }
+									else
+									{
+                                        newParams.push(pairs[0] + '=' + pairs[1]);
+                                    }
+                                }
+                            }
+
+							if (!foundSortParam)
+							{
+                                newParams.push('sort' + '=' + ddlSort.val());
+                                }
+
+                                newURL += newParams.join('&');
+
+                                window.location = newURL;
+                            }
+                        </script>
+
+                    
+                </div>
+            
+            <div class="tabHeaderName">
+                Imobiliário
+            </div>
+        </div>
+
+        
+        <div class="searchResultProperties">
+            
+        <div class="searchResultProperty">
+            <span class="propertyIcons">
+                <a id="MC_realestateList_repRealestates_aImgMIcon_0" title="Imóvel Millennium bcp" class="propertyIconMIcon"></a>
+                <a href="javascript:void(0);" class="propertyIconFav" favorite="5d380c1d-7501-11f1-9c13-060000000051_propertyIconFavOn_Remover Favorito" title="Adicionar Favorito"></a>
+                
+                <a id="MC_realestateList_repRealestates_aHasGPS_0" title="Georreferênciação" class="propertyIconMap" href="/Detail.aspx?UID=5d380c1d-7501-11f1-9c13-060000000051&amp;detailTab=Mapa"></a>
+            </span>
+            <a id="MC_realestateList_repRealestates_aContent_0" title="Ver Apartamento T3, Casal de Cambra  - 119126" href="/Detail.aspx?UID=5d380c1d-7501-11f1-9c13-060000000051&amp;sa=11&amp;mca=1&amp;buf=1&amp;gp=300000&amp;obp=1">
+                <div class="picContainer" style="position: relative;">
+                    <img src="https://images.egorealestate.com/Z140x105/S5/C30/P30564332/Tphoto/IDec5fd201-0000-0500-0000-00001a9e5a43.jpg" id="MC_realestateList_repRealestates_imgRealestate_0" width="140" height="105" onerror="ImageOnError(this, &#39;/App_Themes/PTPT/Images/NoPic140x105.jpg&#39;);" alt="Ver Apartamento T3, Casal de Cambra  - 119126" />
+                    <div style="position: absolute; left: 0; top: 0; opacity: 0.5; width: 143px; height: 108px;">
+                        <img width="140" height="105" src="/App_Themes/PTPT/Images/ImgMask.png" style="border: 0px;" />
+                        <img src="/App_Themes/PTPT/Images/marca_agua.png" style="border: 0px; width: 40px; height: 55px; margin-left: 50px; margin-top: -80px; display: none;" />
+                    </div>
+                    <div style="position: absolute; left: 105px; top: 84px;">
+                        <img id="MC_realestateList_repRealestates_imgEnergyCategory_0" title="Classe Energética" src="/App_Themes/PTPT/Images/Logos/E.png" style="height:21px;width:24px;border:0px;" />
+                    </div>
+                    <div style="position: absolute; left: 0; top: 0;">
+                        
+                    </div>
+                    <div style="position: absolute; left: 0; top: 0;">
+                        
+                    </div>
+                    <div style="position: absolute; left: 0; top: 0;">
+                        <img id="MC_realestateList_repRealestates_imgReserved_0" title="Reservado" src="/App_Themes/PTPT/Images/Backgrounds/reserved.png" style="height:50px;width:50px;border:0px;" />
+                    </div>
+                    <div style="position: absolute; left: 0; top: 0;">
+                        
+                    </div>
+                    <div style="position: absolute; left: 0; top: 0;">
+                        
+                    </div>
+                </div>
+                <div class="propertyTopData">
+                    <span class="propertyNature">Apartamento&nbsp;T3</span>
+                    <span class="propertyPrice">
+                        &euro; 232 000</span>
+                </div>
+
+                <div class="propertyData">
+                    <div class="propertyDataColumn">
+                        <span><strong>Concelho</strong>: Sintra</span>
+                        <span><strong>Freguesia</strong>: Casal de Cambra</span>
+                        <span><strong>Imóvel Millennium bcp</strong></span>
+                    </div>
+                    <div class="propertyDataColumn" style="width: 260px;">
+                        
+                        <span><strong>Tipologia</strong>: T3</span>
+                        <span><strong>Área</strong>: 85 m²</span>
+                        <span><strong>Para</strong>: Venda</span>
+
+                        <span><strong>Ano</strong>: 1991</span>
+                    </div>
+                    
+                </div>
+            </a>
+            
+            
+
+            <div class="propertyData" style="width: 100%; text-align: center; margin-bottom: 5px;">
+                <span style='font-family:Arial,Helvetica,sans-serif; font-size: 12px;color: #555;'>O Banco aceita propostas de aquisição deste imóvel pelo preço anunciado.</span>
+            </div>
+        </div>
+        
+    
+<script type='text/javascript'>$(document).ready(function(){var imgVCS1 = new Image();imgVCS1.style.position='absolute';imgVCS1.style.top='0px';imgVCS1.style.left='0px';imgVCS1.width='0px';imgVCS1.height='0px';imgVCS1.src = '//vcs.imoguia.com/VCS.aspx?Version=2&tick=639287296937654261&K=StatsCustomSite&EVT=V&ItemCount=1&ID=26187507&TP=40&UID=5d380c1d-7501-11f1-9c13-060000000051&BU=1&CL=8571&CLID=26187507&SYS=5&FLAG=0&R=' + encodeURIComponent (document.referrer) + '&PN=1';document.body.appendChild (imgVCS1);});</script>
+        </div>
+        
+<div class="searchResultPaginator">
+	
+	<a id="MC_paginator_LinkPreviousInactive">‹ Anterior</a>
+	
+	
+	
+
+	
+
+	<a class="activePage">1</a>
+
+	
+
+	
+	
+	
+	
+	<a id="MC_paginator_LinkNextInactive">Seguinte ›</a>
+</div>
+    </div>
+    
+<div class="linksArea">
+	<div class="linksColumn">
+		<p class="columnTitle">Contactos</p>
+		<p class="phoneNumber">+351 211 988 863</p>
+		<p class="phoneNumberFootnote">Atendimento personalizado 10h - 22h</p>
+	</div>
+	<div class="linksColumn" style="display:none;">
+		<iframe src="/IFrames/Click2Call.aspx" frameborder="0" scrolling="no" style="width:240px; height:73px; margin-top: -12px;"></iframe>
+	</div>
+	<div class="linksColumn">
+		<p class="columnTitle">Newsletter</p>
+		<p>
+			<a href="javascript:void(0);" onclick="window.newsletterSubscribePopup.dialog('open');$('#auxIframe').attr('src',$('#auxIframe').attr('src'));">Subscrever</a>
+		</p>
+		
+			<p>
+				<a href="/Popups/LastNewsletter.aspx" target="_blank">Consultar Última Newsletter</a>
+			</p>
+		
+	</div>
+	
+	<a href="http://www.egorealestate.pt" class="linkEgo" target="_blank">Powered by <img src="/App_Themes/PTPT/Images/Logos/logo-ego-real-estate.png" width="72" height="14"/></a>
+</div>
+<div id="newsletterSubscribe" title="Subscrever Newsletter" style="display:none;">
+	<div id="newsletterSubscribeSucessMessage" class="detailFormMessage" style="visibility: hidden;">
+		<p>Pedido efetuado com sucesso!</p>
+		<p><img src="/App_Themes/PTPT/Images/Buttons/success.png" width="25" height="25" /></p>
+		<p><a href="javascript:void(0)" onclick="BackToNewsletterForm();">‹ Voltar ao formulário</a></p>
+	</div>
+
+	<div id="newsletterSubscribeErrorMessage" class="detailFormMessage" style="visibility: hidden;">
+		<p>Ocorreu um problema a efetuar o pedido!</p>
+		<p><img src="/App_Themes/PTPT/Images/Buttons/error.png" width="25" height="25" /></p>
+		<p><a href="javascript:void(0)" onclick="BackToNewsletterForm();">‹ Voltar ao formulário</a></p>
+	</div>
+	<form id="newsletterSubscribeForm">
+		<input id="newsletterSubscribeHPotName" name="newsletterSubscribeHPotName" type="text" style="display:none;" />
+		<div class="noResultFormLine">
+			<label>Nome</label>
+			<input type="text" id="newsletterSubscribeTXTNome" name="newsletterSubscribeTXTNome" maxlength="128" tabindex="1" title="Nome" />
+		</div>
+		<div class="noResultFormLine">
+			<label>Email</label>
+			<input type="text" id="newsletterSubscribeTXTEmail" name="newsletterSubscribeTXTEmail" maxlength="128" tabindex="2" title="Email" />
+		</div>
+		<a id="newsletterSubscribeBTSend" href="javascript:void(0);" onclick="SubmitNewsletterForm();" tabindex="7" rel="nofollow" class="boxFormSubmit">Enviar</a>
+	</form>
+</div>
+<script type="text/javascript" language="javascript">
+	$(document).ready(function()
+	{
+		window.newsletterSubscribePopup = $('#newsletterSubscribe').dialog({ autoOpen: false, width: 750, position: [115, 160] });
+	});
+
+	var newsletterSubscribeHPotName = document.getElementById('newsletterSubscribeHPotName');
+	var newsletterSubscribeTXTNome = document.getElementById('newsletterSubscribeTXTNome');
+	var newsletterSubscribeTXTEmail = document.getElementById('newsletterSubscribeTXTEmail');
+	var $newsletterSubscribeBTSend = $('#newsletterSubscribeBTSend');
+	var $newsletterSubscribeForm = $('#newsletterSubscribeForm');
+	var $newsletterSubscribeSucessMessage = $('#newsletterSubscribeSucessMessage');
+	var $newsletterSubscribeErrorMessage = $('#newsletterSubscribeErrorMessage');
+
+	function ValidateNewsletterForm()
+	{
+		if (newsletterSubscribeTXTNome && newsletterSubscribeTXTNome.value.trim() == "")
+		{
+			ShowFormNotify('Tem de preencher o seu nome', $('#newsletterSubscribeTXTNome'), 'top');
+			return false;
+		}
+
+		if (newsletterSubscribeTXTNome && !newsletterSubscribeTXTNome.value.secure())
+		{
+			ShowFormNotify('Contêm caracteres inválidos', $('#newsletterSubscribeTXTNome'), 'top');
+			return false;
+		}
+
+		if (newsletterSubscribeTXTEmail && newsletterSubscribeTXTEmail.value.trim() == "")
+		{
+			ShowFormNotify('Tem de preencher o seu email', $('#newsletterSubscribeTXTEmail'), 'top');
+			return false;
+		}
+
+		if (newsletterSubscribeTXTEmail && !EmailValido(newsletterSubscribeTXTEmail))
+		{
+			ShowFormNotify('O email não foi considerado correcto', $('#newsletterSubscribeTXTEmail'), 'top');
+			return false;
+		}
+
+		return true;
+	}
+
+	function SubmitNewsletterForm()
+	{
+		if (ValidateNewsletterForm())
+		{
+			$.ajax({
+				type: "POST",
+				url: "/Ajax/Newsletter/SubscribeNewsletter.aspx",
+				data: "hPotName=" + newsletterSubscribeHPotName.value
+					+ "&txtNome=" + newsletterSubscribeTXTNome.value
+					+ "&txtEmail=" + newsletterSubscribeTXTEmail.value,
+				cache: false,
+				async: false,
+				beforeSend: function(xmlHttpRequest, settings)
+				{
+					$newsletterSubscribeBTSend.html("A Enviar").disable();
+				},
+				success: function(data, textStatus, xmlHttpRequest)
+				{
+					$newsletterSubscribeSucessMessage.visible();
+				},
+				error: function(xmlHttpRequest, textStatus, errorThrown)
+				{
+					$newsletterSubscribeErrorMessage.visible();
+				},
+				complete: function(xmlHttpRequest, textStatus)
+				{
+					newsletterSubscribeTXTNome.value = '';
+					newsletterSubscribeTXTEmail.value = '';
+
+					$newsletterSubscribeForm.invisible();
+					$newsletterSubscribeBTSend.html("Enviar").enable();
+				}
+			});
+		}
+	}
+
+	function BackToNewsletterForm()
+	{
+		$newsletterSubscribeSucessMessage.invisible();
+		$newsletterSubscribeErrorMessage.invisible();
+
+		$newsletterSubscribeForm.visible();
+	}
+</script>
+
+		<div class="CSSReset clientContentFooter">
+			<div style="line-height: 200%;"><p style="font-size: 12px;">
+  </p><p class="MsoListParagraph"><span style="font-size:11.0pt;font-family:'Aptos',sans-serif;
+mso-ascii-theme-font:minor-latin;mso-fareast-font-family:Aptos;mso-fareast-theme-font:
+minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:'Times New Roman';
+mso-bidi-theme-font:minor-bidi;mso-ansi-language:PT;mso-fareast-language:EN-US;
+mso-bidi-language:AR-SA"><a href="https://investimentos.millenniumbcp.pt/pt/Documents/RPR0016-PT.pdf" target="">Consulte, clicando <b>aqui</b>,
+os Princípios Orientadores da Venda de Imóveis pelo Millennium bcp.</a></span></p><p class="MsoListParagraph"><font size="2"><br></font></p><p class="MsoNormal" align="center" style="text-align:center"><b><font face="Verdana">PROTEÇÃO DE DADOS<o:p></o:p></font></b></p><p class="MsoNormal"><b><font face="Verdana">&nbsp;</font></b></p><p class="MsoListParagraphCxSpFirst" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><!--&#91;endif&#93;-->O Banco Comercial Português, S.A. (doravante
+referido como Millennium bcp), no âmbito e para o exercício da atividade
+imobiliária que se encontra habilitado a praticar, é responsável pelo
+tratamento de dados pessoais necessários para a execução de diligências pré
+contratuais na análise de propostas de compra/venda de imóveis próprios ou
+detidos por Entidades controladas pelo Banco (Participações ou Fundos).<o:p></o:p></font></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify"><span style="color:red;mso-fareast-language:EN-US"><font face="Verdana">&nbsp;</font></span></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>2.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><!--&#91;endif&#93;-->O
+Millennium bcp é a entidade legal que determina as finalidades e os meios de
+tratamento de dados pessoais dos titulares. Neste contexto, o Millennium bcp
+trata as seguintes categorias de dados: dados de identificação e contacto,
+dados biográficos, dados financeiros e demais dados necessários à análise de
+propostas de aquisição e respetivos contratos de venda dos imóveis. <b>&nbsp;</b><o:p></o:p></font></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify"><o:p><font face="Verdana">&nbsp;</font></o:p></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>3.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><!--&#91;endif&#93;-->As
+entidades subcontratadas, bem como as entidades fornecedoras ou licenciadores
+de serviços ao Banco, incluindo as sedeadas fora da União Europeia, poderão ter
+acesso a dados recolhidos e registados pelo Banco e realizar outras operações
+de tratamento dos dados pessoais das pessoas singulares intervenientes neste
+âmbito, quando e na medida em que tal se mostre necessário para o cumprimento
+das obrigações contratuais estabelecidas entre o Millennium bcp e aquelas,
+estando os subcontratantes vinculados pela cumprimento do dever de sigilo
+bancário, bem como o rigoroso cumprimento de toda a legislação e demais normas
+aplicáveis ao tratamento de dados pessoais, nos exatos termos em que o
+Millennium bcp está obrigado. <o:p></o:p></font></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify"><o:p><font face="Verdana">&nbsp;</font></o:p></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>4.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></b><!--&#91;endif&#93;-->Os dados pessoais são conservados pelo tempo
+necessário e enquanto subsistirem as legitimas finalidades para as quais os
+dados são tratados, para cumprimento de obrigações contratuais, legais e
+regulamentares ou para proteção dos interesses legítimos do Millennium bcp ou
+de entidades terceiras. O Millennium bcp eliminará ou anonimizará os dados
+pessoais das pessoas singulares intervenientes neste âmbito quando os mesmos
+deixarem de ser necessários à prossecução das finalidades para as quais tenham
+sido recolhidos e tratados.<b><o:p></o:p></b></font></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify"><o:p><font face="Verdana">&nbsp;</font></o:p></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>5.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><!--&#91;endif&#93;-->É
+assegurado às pessoas singulares, nos termos legais, o direito de informação,
+acesso, retificação, oposição, apagamento, limitação e portabilidade dos dados
+pessoais, mediante comunicação escrita dirigida ao Millennium bcp. O exercício
+destes direitos, bem como qualquer reclamação relativamente aos tratamentos dos
+seus dados pessoais, pode ser apresentada ao Banco ou ao respetivo Encarregado
+da Proteção de Dados em conformidade com o previsto na Política de Privacidade
+do Millennium bcp, que pode ser acedida em qualquer sucursal do Banco ou
+através do respetivo sítio de Internet, em <a href="http://www.millenniumbcp.pt/">www.millenniumbcp.pt</a>&nbsp; e documentos acessíveis nas diversas plataformas
+de comunicação do Banco. Os contactos do Encarregado da Proteção de Dados do
+Banco são: Av. Prof. Dr. Cavaco Silva (Tagus Park) Edf. 4, nº 26, 2740-256
+Porto Salvo ou através do endereço de correio eletrónico: <a href="mailto:protecao.dados.pessoais@millenniumbcp.pt">protecao.dados.pessoais@millenniumbcp.pt</a>. Existe ainda o direito de apresentar
+reclamação a uma autoridade de controlo competente nos termos da lei. <o:p></o:p></font></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:21.3pt;mso-add-space:
+auto;text-align:justify"><o:p><font face="Verdana">&nbsp;</font></o:p></p><p class="MsoListParagraphCxSpLast" style="margin-left:21.3pt;mso-add-space:auto;
+text-align:justify;text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--&#91;if !supportLists&#93;--><font face="Verdana"><b>6.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><!--&#91;endif&#93;-->A
+política de privacidade a que se reporta o número anterior pode, a todo o
+tempo, ser alterada, no sentido da sua adequação às melhores práticas de
+mercado ou a futuras alterações legislativas ou regulamentares. A versão
+atualizada poderá ser também consultada em qualquer sucursal do Banco ou no respetivo
+sítio da internet, em <a href="http://www.millenniumbcp.pt/">www.millenniumbcp.pt</a>.<o:p></o:p></font></p><p class="MsoListParagraph">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal" style="text-align:justify"><o:p><font face="Verdana">&nbsp;</font></o:p></p>
+</div>
+		</div>
+	</div>
+	
+</body>
+</html>
