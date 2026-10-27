@@ -105,3 +105,10 @@ def test_create_app_under_uvicorn_logs_app_info_to_stderr(config):
                             env={**os.environ, "DB_PATH": config.db_path},
                             timeout=60)
     assert "scraper-line" in result.stderr, result.stderr
+
+
+def test_index_lists_unscraped_sources_as_external_links(client):
+    html = client.get("/").text
+    for url in ("https://vendas.portaldasfinancas.gov.pt/vendasat", "https://www.caixaimobiliario.pt/",
+                "https://www.imoveismontepio.pt/", "https://www.lcpremium.pt/pt/electronic-auctions"):
+        assert f'href="{url}"' in html

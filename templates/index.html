@@ -16,6 +16,9 @@
   .sources { color:var(--muted); font-size:.85rem; margin-bottom:12px; }
   .sources span { margin-right:12px; white-space:nowrap; }
   .broken { color:var(--warn); font-weight:600; }
+  .others { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:8px 12px; font-size:.85rem; }
+  .others ul { margin:4px 0 0; padding-left:18px; }
+  .others .small { display:inline; }
   form { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
   select, button { padding:6px 8px; font:inherit; background:var(--card); color:var(--fg); border:1px solid var(--line); border-radius:6px; }
   table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); }
@@ -43,6 +46,16 @@
     {% else %}
       <span>Ainda sem dados.</span>
     {% endfor %}
+  </div>
+
+  <div class="others">
+    Ver também (não pesquisados automaticamente):
+    <ul>
+      <li><a href="https://vendas.portaldasfinancas.gov.pt/vendasat" target="_blank" rel="noopener noreferrer">Portal das Finanças — venda de bens penhorados</a> <span class="small">requer login Autenticação.Gov</span></li>
+      <li><a href="https://www.caixaimobiliario.pt/" target="_blank" rel="noopener noreferrer">Caixa Imobiliário (CGD)</a> <span class="small">bloqueia acesso automático</span></li>
+      <li><a href="https://www.imoveismontepio.pt/" target="_blank" rel="noopener noreferrer">Imóveis Montepio</a> <span class="small">sem habitação em Lisboa/Setúbal na última verificação</span></li>
+      <li><a href="https://www.lcpremium.pt/pt/electronic-auctions" target="_blank" rel="noopener noreferrer">LC Premium — leilões eletrónicos</a> <span class="small">sem preço nem tipologia por lote</span></li>
+    </ul>
   </div>
 
   <form method="get">
