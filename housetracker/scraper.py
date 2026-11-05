@@ -22,7 +22,6 @@ SOURCES = {
 # Auction aggregators always have stock; 0 raw results means the source is broken.
 # Banks may legitimately have nothing in the two districts.
 ZERO_IS_BROKEN = {"eleiloes", "leilosoc"}
-GROUP_THRESHOLD = 10
 
 
 def _fetch_source(name: str, fetch, config: Config) -> tuple[int | None, list, str | None]:
@@ -44,8 +43,6 @@ def run_scrape(config: Config, sender: notifier.Notifier | None = None,
     sources = SOURCES if sources is None else sources
     now = datetime.now(UTC)
     results: dict[str, bool] = {}
-    new_listings = []
-    seeded_any = False
     conn = db.connect(config.db_path)
     try:
         for name, fetch in sources.items():
@@ -61,30 +58,11 @@ def run_scrape(config: Config, sender: notifier.Notifier | None = None,
                 sender.send(f"HouseTracker: source {name} recovered")
             if not ok:
                 continue  # never touch listings of a broken source
-            new = db.upsert_listings(conn, filters.filter_listings(listings, config.max_price), now)
+            db.upsert_listings(conn, filters.filter_listings(listings, config.max_price), now)
             db.deactivate_unseen(conn, name, now)
-            if db.get_meta(conn, f"seeded:{name}") is None:
-                db.set_meta(conn, f"seeded:{name}", now.isoformat())
-                seeded_any = True  # first run of this source: seed silently
-            else:
-                new_listings += new
-        if seeded_any and db.get_meta(conn, "start_summary_sent") is None:
-            db.set_meta(conn, "start_summary_sent", now.isoformat())
-            sender.send(f"HouseTracker started: {db.count_active(conn)} listings tracked")
-        _notify_new(sender, new_listings)
     finally:
         conn.close()
     return results
-
-
-def _notify_new(sender: notifier.Notifier, new_listings: list) -> None:
-    if not new_listings:
-        return
-    if len(new_listings) > GROUP_THRESHOLD:
-        sender.send(notifier.format_grouped(new_listings))
-        return
-    for item in new_listings:
-        sender.send(notifier.format_listing(item))
 
 
 def run_scheduled(config: Config) -> None:

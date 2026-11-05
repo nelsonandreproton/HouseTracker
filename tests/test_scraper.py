@@ -41,33 +41,20 @@ def _active_ids(config, source):
         conn.close()
 
 
-def test_run_scrape_first_run_seeds_silently_with_single_summary(config, make_listing):
+def test_run_scrape_first_run_sends_no_messages(config, make_listing):
     items = [make_listing(external_id=str(i)) for i in range(3)]
     _, sender = _run(config, {"eleiloes": _source(items)})
-    assert sender.sent == ["HouseTracker started: 3 listings tracked"]
+    assert sender.sent == []
+    assert _active_ids(config, "eleiloes") == ["0", "1", "2"]
 
 
-def test_run_scrape_second_run_sends_one_message_per_new_listing(config, make_listing):
+def test_run_scrape_new_listings_are_stored_without_sending_messages(config, make_listing):
     first = [make_listing(external_id="1")]
     _run(config, {"eleiloes": _source(first)})
-    second = first + [make_listing(external_id="2"), make_listing(external_id="3")]
-    _, sender = _run(config, {"eleiloes": _source(second)})
-    assert len(sender.sent) == 2
-    assert all(m.startswith("Novo imóvel:") and "https://example.test/A1" in m for m in sender.sent)
-    assert "valor mínimo" in sender.sent[0] and "leilão" in sender.sent[0]
-
-
-def test_run_scrape_more_than_ten_new_listings_sends_one_grouped_message(config, make_listing):
-    _run(config, {"eleiloes": _source([make_listing(external_id="seed")])})
-    many = [make_listing(external_id=str(i)) for i in range(11)]
+    many = first + [make_listing(external_id=str(i)) for i in range(2, 14)]
     _, sender = _run(config, {"eleiloes": _source(many)})
-    assert len(sender.sent) == 1 and sender.sent[0].startswith("11 novos imóveis")
-
-
-def test_run_scrape_exactly_ten_new_listings_are_sent_individually(config, make_listing):
-    _run(config, {"eleiloes": _source([make_listing(external_id="seed")])})
-    _, sender = _run(config, {"eleiloes": _source([make_listing(external_id=str(i)) for i in range(10)])})
-    assert len(sender.sent) == 10
+    assert sender.sent == []
+    assert len(_active_ids(config, "eleiloes")) == 13
 
 
 def test_run_scrape_listing_above_max_price_is_not_stored(config, make_listing):
@@ -149,15 +136,6 @@ def test_run_scrape_failing_source_does_not_stop_other_sources(config, make_list
     statuses = {s.source: s.ok for s in db.all_statuses(conn)}
     conn.close()
     assert statuses == {"eleiloes": False, "santander": True}
-
-
-def test_run_scrape_late_seeded_source_is_silent_after_initial_summary(config, make_listing):
-    _run(config, {"eleiloes": _failing(RuntimeError("x")),
-                  "santander": _source([make_listing(source="santander", external_id="S")])})
-    items = [make_listing(external_id=str(i)) for i in range(3)]
-    _, sender = _run(config, {"eleiloes": _source(items),
-                              "santander": _source([make_listing(source="santander", external_id="S")])})
-    assert not any(m.startswith("Novo imóvel") for m in sender.sent)
 
 
 def test_notifier_without_token_skips_send_gracefully():

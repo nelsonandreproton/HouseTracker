@@ -5,7 +5,7 @@ import requests
 import responses
 
 from housetracker import http
-from housetracker.notifier import Notifier, format_grouped, format_listing, format_price
+from housetracker.notifier import Notifier, format_price
 
 URL = "https://example.test/x"
 
@@ -35,18 +35,6 @@ def test_get_transient_failure_then_success_returns_response():
 
 def test_format_price_groups_thousands_with_spaces():
     assert format_price(185000.0) == "185 000 €" and format_price(None) == "?"
-
-
-def test_format_listing_contains_key_fields(make_listing):
-    text = format_listing(make_listing())
-    for part in ("Apartamento T2 em Sintra", "Sintra, Lisboa", "T2", "150 000 €",
-                 "valor mínimo", "leilão", "https://example.test/A1"):
-        assert part in text
-
-
-def test_format_grouped_is_truncated_to_telegram_limit(make_listing):
-    items = [make_listing(external_id=str(i), url="https://example.test/" + "x" * 200) for i in range(60)]
-    assert len(format_grouped(items)) <= 4000
 
 
 @responses.activate

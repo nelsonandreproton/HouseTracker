@@ -1,6 +1,6 @@
 # HouseTracker
 
-Every `SCRAPE_INTERVAL_HOURS` hours (default 6) it scrapes Portuguese property auction and bank-sale sources, keeps apartments and moradias in the districts of Lisboa and Setúbal priced at or below `MAX_PRICE` (default 300 000 EUR), stores them in SQLite, serves a one-page list at `/` and sends Telegram messages for new listings. `/health` returns JSON for monitoring.
+Every `SCRAPE_INTERVAL_HOURS` hours (default 6) it scrapes Portuguese property auction and bank-sale sources, keeps apartments and moradias in the districts of Lisboa and Setúbal priced at or below `MAX_PRICE` (default 300 000 EUR), stores them in SQLite, and serves a one-page list at `/`. Telegram is used only for source health alerts. `/health` returns JSON for monitoring.
 
 ## Sources included
 
@@ -22,7 +22,7 @@ Partial-ownership lots (fractions like 1/4, proporções, nua propriedade, usufr
 
 ## Health and alerts
 
-A source is "broken" if its fetch raised (HTTP/TLS errors, missing `__NEXT_DATA__`, missing JSON keys or HTML container) or, for e-leiloes and Leilosoc, returned 0 raw results (banks may legitimately return 0). A Telegram alert is sent only when a source flips ok -> broken, and a message when it recovers. Listings of a broken source are never deactivated. The first successful run seeds silently and sends one "started" summary; more than 10 new listings in a run are sent as one grouped message. Without `TELEGRAM_BOT_TOKEN` messages are only logged.
+A source is "broken" if its fetch raised (HTTP/TLS errors, missing `__NEXT_DATA__`, missing JSON keys or HTML container) or, for e-leiloes and Leilosoc, returned 0 raw results (banks may legitimately return 0). A Telegram alert is sent only when a source flips ok -> broken, and a message when it recovers. Listings of a broken source are never deactivated. New listings only appear on the web page; they are not sent to Telegram. Without `TELEGRAM_BOT_TOKEN` messages are only logged.
 
 If `heartbeat` is importable (HetznerCheck mounted via `PYTHONPATH`), each scheduled scrape beats `HouseTracker` with `next_in_seconds`; the manual CLI never does.
 

@@ -49,7 +49,7 @@
       <span class="badge blue">Python 3.11</span>
       <span class="badge green">FastAPI + SQLite</span>
       <span class="badge orange">4 sources</span>
-      <span class="badge cyan">Web list + Telegram</span>
+      <span class="badge cyan">Web list + health alerts</span>
       <span class="badge red">Docker Compose</span>
     </div>
   </header>
@@ -62,7 +62,7 @@
         <p style="color:var(--muted);font-size:0.9rem;margin-bottom:12px;">
           Every 6 hours it scrapes Portuguese property auction and bank-sale sites, keeps apartments
           and houses in the Lisboa and Setúbal districts priced at or below 300 000 EUR, stores them
-          in SQLite, serves a single-page list at <code>/</code> and sends Telegram alerts for new listings.
+          in SQLite, serves a single-page list at <code>/</code> and sends a Telegram alert when a source breaks or recovers.
         </p>
         <div>
           <span class="tag">Lisboa + Setúbal</span><span class="tag">Apartments + moradias</span>
@@ -74,7 +74,7 @@
         <h3>Configuration (env / .env)</h3>
         <div class="param-grid">
           <span class="label">TELEGRAM_BOT_TOKEN</span><span class="val">without it, messages are only logged</span>
-          <span class="label">TELEGRAM_CHAT_ID</span><span class="val">alert destination</span>
+          <span class="label">TELEGRAM_CHAT_ID</span><span class="val">source health alert destination</span>
           <span class="label">MAX_PRICE</span><span class="val">default 300000</span>
           <span class="label">SCRAPE_INTERVAL_HOURS</span><span class="val">default 6</span>
           <span class="label">DB_PATH</span><span class="val">default data/housetracker.db</span>
@@ -125,11 +125,10 @@
           <div class="flow-arrow">→</div>
           <div class="flow-box accent"><strong>SQLite upsert</strong><small>new / still active</small></div>
           <div class="flow-arrow">→</div>
-          <div class="flow-box green"><strong>Telegram</strong><small>new listing, broken / recovered</small></div>
+          <div class="flow-box green"><strong>Telegram</strong><small>source broken / recovered only</small></div>
         </div>
         <p style="color:var(--muted);font-size:0.82rem;margin-top:14px;">
-          The first successful run seeds silently and sends one "started" summary. More than 10 new
-          listings in a run are sent as one grouped message. Partial-ownership lots (fractions,
+          New listings only appear on the web page; they are not sent to Telegram. Partial-ownership lots (fractions,
           nua propriedade, usufruto, direito de superfície, meação, quotas) are excluded by title.
         </p>
       </div></div>
